@@ -20,7 +20,7 @@ m=size(train.X,2);
 n=size(train.X,1);
 
 % Train logistic regression classifier using minFunc
-options = struct('MaxIter', 100);
+options = struct('MaxIter', 100, 'useMex', 0);
 
 % First, we initialize theta to some small random values.
 theta = rand(n,1)*0.001;
@@ -30,7 +30,7 @@ theta = rand(n,1)*0.001;
 % TODO:  Implement batch logistic regression in the logistic_regression.m file!
 %
 tic;
-theta=minFunc(@logistic_regression, theta, options, train.X, train.y);
+theta=minFunc(@logistic_regression_vec, theta, options, train.X, train.y);
 fprintf('Optimization took %f seconds.\n', toc);
 
 % Now, call minFunc again with logistic_regression_vec.m as objective.

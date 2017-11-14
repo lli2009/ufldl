@@ -30,6 +30,14 @@ pooledFeatures = zeros(convolvedDim / poolDim, ...
 %   Use mean pooling here.
 
 %%% YOUR CODE HERE %%%
-
+for imageNum=1:numImages
+  for filterNum=1:numFilters
+    feature = convolvedFeatures(:, :, filterNum, imageNum);
+    avg_pool = ones(poolDim, poolDim);
+    avg_pool./=numel(avg_pool);
+    pool_ret = conv2(feature, avg_pool, 'valid');
+    pooledFeatures(:,:,filterNum, imageNum) = pool_ret(1:poolDim:end, 1:poolDim:end);
+  end
+end
 end
 
